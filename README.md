@@ -14,7 +14,7 @@ with the ability to change the URL to fit your needs.
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+RSS-Parser uses a number of open source projects to work properly:
 
 - [Express] - fast node.js network app framework
 - [Cron](https://www.npmjs.com/package/cron) - is a tool that allows you to execute something on a schedule.
