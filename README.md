@@ -74,22 +74,22 @@ karma test
 
 **Insomnia or Postman**:
  *Automatic parse in to DB*.
-```http
+```
 http://localhost:7000/api/create/auto  - // Automatic parse in to DB.
 ```
 
 *Get all posts from DB*.
-```http
+```
 http://localhost:7000/api/posts/  - // Get all posts from DB.
 ```
 
 ***CRUD & REST API***
 
 *Create custom post*.
-```http
+```
 http://localhost:7000/api/create/  - // Create custom post.
 ```
-```JSON
+```Javascript
 {
     cron:'Put cron code here.'
     feed:'Post feed.'
@@ -98,10 +98,10 @@ http://localhost:7000/api/create/  - // Create custom post.
 ```
 
 *Reading someone post*.
-```http
+```
 http://localhost:7000/api/read/  - // Reading someone post.
 ```
-```JSON
+```Javascript
 {
     feed:'Post search keywords.'
     link:'Please insert links here if available.'
@@ -109,10 +109,10 @@ http://localhost:7000/api/read/  - // Reading someone post.
 ```
 
 *Update post*.
-```http
+```
 http://localhost:7000/api/update/  - // Update post.
 ```
-```JSON
+```Javascript
 {
     feed:'Post search keywords.'
     link:'Please insert links here if available.'
@@ -122,10 +122,10 @@ http://localhost:7000/api/update/  - // Update post.
 ```
 
 *Deleting someone post*.
-```http
+```
 http://localhost:7000/api/delete/  - // Deleting someone post.
 ```
-```JSON
+```Javascript
 {
     feed:'Post search keywords.'
     link:'Please insert links here if available.'
