@@ -11,7 +11,8 @@ class CronService {
         this.url = url;
     }
     Start(){
-        const cronJob = cron.CronJob(this.CronTime,this.Init);
+        const cronJob = new cron.CronJob(this.CronTime,this.Init());
+        cronJob.start();
     }
 }
 

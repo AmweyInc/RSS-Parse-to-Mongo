@@ -3,7 +3,7 @@ const PostModel = require('./PostSchema.js')
 class PostService {
     async Create(Feed,Link){
         const requestPost = await PostModel.create({post:Feed,link:Link});
-        console.log('Will be added to database:'+ Feed + Link);
+        console.log('Will be added to database:'+ Feed + ' ' + Link);
         requestPost.save();
     }
 
