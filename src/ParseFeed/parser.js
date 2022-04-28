@@ -130,34 +130,6 @@ class Parser {
     return feed;
   }
 
-  parseItemAtom(entry) {
-    let item = {};
-    utils.copyFromXML(entry, item, this.options.customFields.item);
-    if (entry.title) {
-      let title = entry.title[0] || '';
-      if (title._) title = title._;
-      if (title) item.title = title;
-    }
-    if (entry.link && entry.link.length) {
-      item.link = utils.getLink(entry.link, 'alternate', 0);
-    }
-    if (entry.published && entry.published.length && entry.published[0].length) item.pubDate = new Date(entry.published[0]).toISOString();
-    if (!item.pubDate && entry.updated && entry.updated.length && entry.updated[0].length) item.pubDate = new Date(entry.updated[0]).toISOString();
-    if (entry.author && entry.author.length && entry.author[0].name && entry.author[0].name.length) item.author = entry.author[0].name[0];
-    if (entry.content && entry.content.length) {
-      item.content = utils.getContent(entry.content[0]);
-      item.contentSnippet = utils.getSnippet(item.content)
-    }
-    if (entry.summary && entry.summary.length) {
-      item.summary = utils.getContent(entry.summary[0]);
-    }
-    if (entry.id) {
-      item.id = entry.id[0];
-    }
-    this.setISODate(item);
-    return item;
-  }
-
   buildRSS0_9(xmlObj) {
     var channel = xmlObj.rss.channel[0];
     var items = channel.item;
@@ -207,6 +179,34 @@ class Parser {
     return feed;
   }
 
+  parseItemAtom(entry) {
+    let item = {};
+    utils.copyFromXML(entry, item, this.options.customFields.item);
+    if (entry.title) {
+      let title = entry.title[0] || '';
+      if (title._) title = title._;
+      if (title) item.title = title;
+    }
+    if (entry.link && entry.link.length) {
+      item.link = utils.getLink(entry.link, 'alternate', 0);
+    }
+    if (entry.published && entry.published.length && entry.published[0].length) item.pubDate = new Date(entry.published[0]).toISOString();
+    if (!item.pubDate && entry.updated && entry.updated.length && entry.updated[0].length) item.pubDate = new Date(entry.updated[0]).toISOString();
+    if (entry.author && entry.author.length && entry.author[0].name && entry.author[0].name.length) item.author = entry.author[0].name[0];
+    if (entry.content && entry.content.length) {
+      item.content = utils.getContent(entry.content[0]);
+      item.contentSnippet = utils.getSnippet(item.content)
+    }
+    if (entry.summary && entry.summary.length) {
+      item.summary = utils.getContent(entry.summary[0]);
+    }
+    if (entry.id) {
+      item.id = entry.id[0];
+    }
+    this.setISODate(item);
+    return item;
+  }
+  
   parseItemRss(xmlItem, itemFields) {
     let item = {};
     utils.copyFromXML(xmlItem, item, itemFields);
@@ -225,14 +225,6 @@ class Parser {
     this.setISODate(item);
     return item;
   }
-
-  /**
-   * Add iTunes specific fields from XML to extracted JSON
-   *
-   * @access public
-   * @param {object} feed extracted
-   * @param {object} channel parsed XML
-   */
   decorateItunes(feed, channel) {
     let items = channel.item || [];
     let categories = [];
@@ -316,15 +308,6 @@ class Parser {
       }
     }
   }
-
-  /**
-   * Generates a pagination object where the rel attribute is the key and href attribute is the value
-   *  { self: 'self-url', first: 'first-url', ...  }
-   *
-   * @access private
-   * @param {Object} channel parsed XML
-   * @returns {Object}
-   */
   generatePaginationLinks(channel) {
     if (!channel['atom:link']) {
       return {};
